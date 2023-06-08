@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}To do list{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="mb-4 text-center">
+        <h1 aria-current="page">To Do List</h1>
+    </div>
+
+    <div class="text-center">
+        <img src="{{ url_for('static', filename='img/to_do_list.png') }}" alt="To do list" class="img-fluid" width="300"
+            height="300" />
+    </div>
+    <div class="mb-4">
+        <a href="/add_task" class="btn btn-primary">New Task</a>
+    </div>
+    {% if tasks|length < 1 %} <h4 aria-current="page" style="text-align: center;">There are no tasks.</h4>
+        {% else %}
+        <table class="table">
+            <thead class="thead-dark table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Added</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="table table-striped">
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>
+                        {{ task.title }}
+                        <small class="text-muted d-block">{{ task.content }}</small>
+                    </td>
+                    <td>{{ task.date_created }}</td>
+                    <td>
+                        <div class="mb-2">
+                            <a href="/delete/{{ task.id }}" class="btn btn-primary">Delete</a>
+                            <a href="/update/{{ task.id }}" class="btn btn-primary">Update</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        <!-- <form action="/" method="POST">
+        <div class="mb-4">
+
+            <div class="mb-4">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="I want do ...">
+            </div>
+
+            <div class="mb-4">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+            </div>
+
+            <div class="mb-4">
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </div>
+
+        </div>
+    </form> -->
+</div>
+{% endblock body%}

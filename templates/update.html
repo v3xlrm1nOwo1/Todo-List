@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}To do list{% endblock %}
+
+{% block body %}
+<div class="container">
+        <div class="mb-4">
+            <h1 aria-current="page" style="text-align: center;">Update Task</h1>
+        </div>
+    <form action="/update/{{ task.id }}" method="POST">
+        <div class="mb-4">
+
+            <div class="mb-4">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" value="{{ task.title }}">
+            </div>
+
+            <div class="mb-4">
+                <label for="content" class="form-label">Content</label>
+                <textarea class="form-control" id="content" name="content" rows="3">{{ task.content }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <button type="submit" class="btn btn-primary">Update Task</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+{% endblock body%}
